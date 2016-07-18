@@ -4,19 +4,22 @@
 
     function onload() {
         let masterGain = CTX.createGain();
-        let sounds = {};
+
         let editorElem = document.getElementById('editor');
 
-        Resource.fetchAll('/SimpleKit/',['000.wav','001.wav','002.wav'])
+        Resource.fetchAll.apply(null, Logic.kit)
         .then(samples => {
             samples.forEach(function(sample, i) {
                 CTX.decodeAudioData(sample, (decodedSample) => {
-                    sounds[`00${i}`] = decodedSample;
+                    Logic.sounds[`00${i}`] = decodedSample;
                 });
             });
 
             editorElem.addEventListener('keydown', e => {
-                play(e);
+                let bufferSource = Logic.play(e);
+                bufferSource.connect(masterGain);
+                masterGain.connect(CTX.destination);
+                bufferSource.start(CTX.currentTime);
             });
         }).catch(err => console.warn(err));
 
@@ -25,27 +28,5 @@
         }, false);
 
         editorElem.focus();
-
-        function play(e) {
-            let bufferSource = CTX.createBufferSource();
-            switch(e.keyCode) {
-                case 8: {
-                    bufferSource.buffer = sounds['000'];
-                    break;
-                }
-                case 32: {
-                    bufferSource.buffer = sounds['001'];
-                    break;
-                }
-                default: {
-                    bufferSource.buffer = sounds['002'];
-                    break;
-                }
-            }
-
-            bufferSource.connect(masterGain);
-            masterGain.connect(CTX.destination);
-            bufferSource.start(CTX.currentTime);
-        }
     };
 })();
