@@ -20,6 +20,10 @@
                 bufferSource.connect(masterGain);
                 masterGain.connect(CTX.destination);
                 bufferSource.start(CTX.currentTime);
+                bufferSource.onended = function() {
+                    bufferSource.stop();
+                    bufferSource = null;
+                }
             });
         }).catch(err => console.warn(err));
 
