@@ -8,20 +8,18 @@
         let bufferSource = new BufferSource();
         switch(e.keyCode) {
             //backspace, simulates error on typing (dummy)
-            // case 8: {
-            //     bufferSource.gain = .2;
-            //     bufferSource.buffer = this.sounds[6];
-            //     break;
-            // }
+            case 8: {
+                break;
+            }
 
             //'.' and ','
             case 190: {
-                bufferSource.gain = .6;
+                bufferSource.gain = .5;
                 bufferSource.buffer = this.sounds[0];
                 break;
             }
             case 188: {
-                bufferSource.gain = .6;
+                bufferSource.gain = .4;
                 bufferSource.buffer = this.sounds[2];
                 break;
             }
