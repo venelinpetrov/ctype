@@ -17,8 +17,7 @@
             editorElem.addEventListener('keydown', e => {
                 let bufferSource = Logic.play(e);
                 
-                bufferSource.connect(masterGain);
-                masterGain.connect(CTX.destination);
+                bufferSource.connect(CTX.destination);
                 bufferSource.start(CTX.currentTime);
                 bufferSource.onended = function() {
                     bufferSource.stop();
