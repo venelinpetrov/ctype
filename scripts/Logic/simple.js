@@ -1,13 +1,15 @@
 (function (Logic) {
     Logic.sounds = [];
-    Logic.kit = ['/SimpleKit/',['000.wav','001.wav','002.wav']];
+    Logic.kit = ['/SimpleKit/', ['000.wav','001.wav','002.wav']];
     Logic.play = function (e) {
         let bufferSource = CTX.createBufferSource();
         switch(e.keyCode) {
+            //backspace
             case 8: {
                 bufferSource.buffer = this.sounds[0];
                 break;
             }
+            //space
             case 32: {
                 bufferSource.buffer = this.sounds[1];
                 break;
