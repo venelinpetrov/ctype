@@ -4,19 +4,19 @@
 
     function onload() {
         let masterGain = CTX.createGain();
-
         let editorElem = document.getElementById('editor');
 
         Resource.fetchAll.apply(null, Logic.kit)
         .then(samples => {
             samples.forEach(function(sample, i) {
                 CTX.decodeAudioData(sample, (decodedSample) => {
-                    Logic.sounds[`00${i}`] = decodedSample;
+                    Logic.sounds.push(decodedSample);
                 });
             });
 
             editorElem.addEventListener('keydown', e => {
                 let bufferSource = Logic.play(e);
+                
                 bufferSource.connect(masterGain);
                 masterGain.connect(CTX.destination);
                 bufferSource.start(CTX.currentTime);
