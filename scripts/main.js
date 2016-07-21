@@ -8,7 +8,7 @@
         let editorElem = document.querySelector('.editor');
         let kitInputs;
         let currentTypeCallback;
-        let i = 1;
+        let i = 0;
 
         kitInputs = KitsMenu.render(KITS_ARRAY);
 
@@ -19,18 +19,27 @@
 
         document.body.addEventListener('keydown', e => {
             switch(e.keyCode) {
+                // TAB
                 case 9: {
                     e.preventDefault();
-                    checkRadio(kitInputs[i%kitInputs.length]);
-                    i++;
+                    if(e.shiftKey) {
+                        i--;
+                    } else {
+                        i++;
+                    }
+                    checkRadio(kitInputs[Math.abs(i)%kitInputs.length]);
                     break;
                 }
+
+                //F2
                 case 113: {
                     e.preventDefault();
                     masterGainElem.value = +masterGainElem.value - .1;
                     masterGainElem.dispatchEvent(new Event('change'));
                     break;
                 }
+
+                //F3
                 case 114: {
                     e.preventDefault();
                     masterGainElem.value = +masterGainElem.value + .1;
