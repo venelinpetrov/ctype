@@ -12,7 +12,8 @@
 
 </head>
 <body>
-    <ul class="kit-select">
+    <ul class="kit-select"></ul>
+    <!--<ul class="kit-select">
         <li>
             <input name="kit" id="simple-kit" type="radio" value="Simple">
             <label for="simple-kit">Simple Kit</label>
@@ -25,7 +26,11 @@
             <input name="kit" id="smooth-kit" type="radio" value="Smooth" >
             <label for="smooth-kit">Smooth Kit</label>
         </li>
-    </ul>
+        <li>
+            <input name="kit" id="caret-kit" type="radio" value="Caret" >
+            <label for="caret-kit">Caret Kit</label>
+        </li>
+    </ul>-->
     <fieldset>
         <legend>Controls</legend>
         <label for="master_gain">Master Gain: </label>
@@ -35,15 +40,18 @@
     Type here:
     <textarea name="" class="editor" cols="30" rows="10" style="width: 100%"></textarea>
     <strong>Try space and backspace to hear all 3 sounds in SimpleKit</strong>
+
     <!--Prerequisites-->
     <script src="scripts/consts.js"></script>
     <script src="scripts/fetch.js"></script>
     <script src="scripts/BufferSource.js"></script>
+    <script src="scripts/KitsMenu.js"></script>
 
     <!--Logic file-->
     <script src="scripts/Logic/simple.js"></script>
     <script src="scripts/Logic/smooth.js"></script>
     <script src="scripts/Logic/africa.js"></script>
+    <script src="scripts/Logic/caret.js"></script>
 
     <!--Main script-->
     <script src="scripts/main.js"></script>

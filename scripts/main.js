@@ -5,18 +5,18 @@
     function onload() {
         let masterGain = CTX.createGain();
         let editorElem = document.querySelector('.editor');
-        let kitInputs = document.querySelectorAll('.kit-select input');
+        let kitInputs;
         let currentTypeCallback;
         
-        
+        kitInputs = KitsMenu.render(['africa', 'caret', 'simple', 'smooth']);
+
         document.getElementById('master_gain').addEventListener('change', e => {
             masterGain.gain.value = e.target.value;
             editorElem.focus();
         });
 
         Array.from(kitInputs, el => {
-            el.addEventListener('change', changeKit)
-            
+            el.addEventListener('change', changeKit);
         });
 
         kitInputs[0].checked = true;
@@ -37,7 +37,7 @@
                     editorElem.removeEventListener('keydown', currentTypeCallback);
                 }
                 
-                currentTypeCallback = type.bind(editorElem, kitName);
+                currentTypeCallback = type.bind(null, kitName);
                 editorElem.addEventListener('keydown', currentTypeCallback);
             }).catch(err => console.warn(err));
             editorElem.focus();
