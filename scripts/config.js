@@ -1,0 +1,1 @@
+const KITS_ARRAY = ['africa', 'caret', 'simple', 'smooth'];

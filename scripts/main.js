@@ -7,8 +7,8 @@
         let editorElem = document.querySelector('.editor');
         let kitInputs;
         let currentTypeCallback;
-        
-        kitInputs = KitsMenu.render(['africa', 'caret', 'simple', 'smooth']);
+
+        kitInputs = KitsMenu.render(KITS_ARRAY);
 
         document.getElementById('master_gain').addEventListener('change', e => {
             masterGain.gain.value = e.target.value;
