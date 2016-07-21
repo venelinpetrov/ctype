@@ -1,10 +1,10 @@
 // sounds on: . , ! ? letter capitalLetter
 
-(function (Logic) {
-    Logic.sounds = [];
-    Logic.kit = ['/AfricaKit/', ['001.wav', '002.wav', '003.wav', '004.wav', '005.wav', '006.wav', '007.wav']];
+(function (Africa) {
+    Africa.sounds = [];
+    Africa.kit = ['/AfricaKit/', ['001.wav', '002.wav', '003.wav', '004.wav', '005.wav', '006.wav', '007.wav']];
     
-    Logic.play = function (e) {
+    Africa.play = function (e) {
         let bufferSource = new BufferSource();
         switch(e.keyCode) {
             //backspace, simulates error on typing (dummy)
@@ -67,4 +67,4 @@
                 return false
         }
     }
-})(window.Logic = window.Logic || {});
+})(window.Africa = window.Africa || {});

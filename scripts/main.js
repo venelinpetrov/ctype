@@ -4,32 +4,56 @@
 
     function onload() {
         let masterGain = CTX.createGain();
-        let editorElem = document.getElementById('editor');
-
-        Resource.fetchAll.apply(null, Logic.kit)
-        .then(samples => {
-            samples.forEach(function(sample, i) {
-                CTX.decodeAudioData(sample, (decodedSample) => {
-                    Logic.sounds.push(decodedSample);
-                });
-            });
-
-            editorElem.addEventListener('keydown', e => {
-                let bufferSource = Logic.play(e);
-                bufferSource.connect(masterGain);
-                masterGain.connect(CTX.destination);
-                bufferSource.start(CTX.currentTime);
-                bufferSource.onended = function() {
-                    bufferSource.stop();
-                    bufferSource = null;
-                }
-            });
-        }).catch(err => console.warn(err));
-
-        document.getElementById('master_gain').addEventListener('change', (e) => {
+        let editorElem = document.querySelector('.editor');
+        let kitInputs = document.querySelectorAll('.kit-select input');
+        let currentTypeCallback;
+        
+        
+        document.getElementById('master_gain').addEventListener('change', e => {
             masterGain.gain.value = e.target.value;
-        }, false);
+            editorElem.focus();
+        });
 
+        Array.from(kitInputs, el => {
+            el.addEventListener('change', changeKit)
+            
+        });
+
+        kitInputs[0].checked = true;
+        kitInputs[0].dispatchEvent(new Event('change'));
+
+        function changeKit(e) {
+            let kitName = e.target.value;
+            console.log(kitName)
+            Resource.fetchAll.apply(null, window[kitName].kit)
+            .then(samples => {
+                samples.forEach(function(sample, i) {
+                    CTX.decodeAudioData(sample, (decodedSample) => {
+                        window[kitName].sounds.push(decodedSample);
+                    });
+                });
+
+                if (currentTypeCallback) {
+                    editorElem.removeEventListener('keydown', currentTypeCallback);
+                }
+                
+                currentTypeCallback = type.bind(editorElem, kitName);
+                editorElem.addEventListener('keydown', currentTypeCallback);
+            }).catch(err => console.warn(err));
+            editorElem.focus();
+        }
+
+        function type(kitName, e) {
+            let bufferSource = window[kitName].play(e);
+
+            bufferSource.connect(masterGain);
+            masterGain.connect(CTX.destination);
+            bufferSource.start(CTX.currentTime);
+            bufferSource.onended = function() {
+                bufferSource.stop();
+                bufferSource = null;
+            }
+        };
         editorElem.focus();
     };
 })();
