@@ -8,52 +8,19 @@
         let editorElem = document.querySelector('.editor');
         let kitInputs;
         let currentTypeCallback;
-        let i = 0;
 
-        kitInputs = KitsMenu.render(KITS_ARRAY);
+        kitInputs = KitsMenu.init(KITS_ARRAY);
 
         masterGainElem.addEventListener('change', e => {
             masterGain.gain.value = e.target.value;
             editorElem.focus();
-        });
-
-        document.body.addEventListener('keydown', e => {
-            switch(e.keyCode) {
-                // TAB
-                case 9: {
-                    e.preventDefault();
-                    if(e.shiftKey) {
-                        i--;
-                    } else {
-                        i++;
-                    }
-                    checkRadio(kitInputs[Math.abs(i)%kitInputs.length]);
-                    break;
-                }
-
-                //F2
-                case 113: {
-                    e.preventDefault();
-                    masterGainElem.value = +masterGainElem.value - .1;
-                    masterGainElem.dispatchEvent(new Event('change'));
-                    break;
-                }
-
-                //F3
-                case 114: {
-                    e.preventDefault();
-                    masterGainElem.value = +masterGainElem.value + .1;
-                    masterGainElem.dispatchEvent(new Event('change'));
-                    break;
-                }
-            }
         });
         
         Array.from(kitInputs, el => {
             el.addEventListener('change', changeKit);
         });
 
-        checkRadio(kitInputs[0]);
+        KitsMenu.checkRadio(kitInputs[0]);
 
         function changeKit(e) {
             let kitName = e.target.value;
@@ -88,12 +55,6 @@
                 bufferSource = null;
             }
         };
-
-        function checkRadio(radio) {
-            radio.checked = true;
-            radio.dispatchEvent(new Event('change'));
-        }
-
         editorElem.focus();
     };
 })();
