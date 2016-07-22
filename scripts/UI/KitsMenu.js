@@ -23,7 +23,8 @@
                     e.preventDefault();
                     //fix that later
                     if(e.shiftKey) {
-                        i--;
+                        //i--;
+                        confirm("Make me sad again");
                     } else {
                         i++;
                     }
