@@ -3,6 +3,7 @@ class BufferSource {
         this._gainNode = CTX.createGain();
         this._bufferSourceNode = CTX.createBufferSource();
         this._bufferSourceNode.connect(this._gainNode);
+        this._outputNode = null;
     }
 
     start(time) {
@@ -10,7 +11,8 @@ class BufferSource {
     }
 
     connect(node) {
-        this._gainNode.connect(node);
+        this._gainNode.connect(node.input);
+        this._outputNode = node.output;
     }
 
     get gain() {
@@ -27,5 +29,9 @@ class BufferSource {
 
     set buffer(buffer) {
         this._bufferSourceNode.buffer = buffer;
+    }
+
+    get output() {
+        return this._outputNode || this._gainNode;
     }
 }

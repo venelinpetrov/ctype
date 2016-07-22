@@ -47,7 +47,7 @@
         function type(kitName, e) {
             let bufferSource = window[kitName].play(e);
 
-            bufferSource.connect(masterGain);
+            bufferSource.output.connect(masterGain);
             masterGain.connect(CTX.destination);
             bufferSource.start(CTX.currentTime);
             bufferSource.onended = function() {
