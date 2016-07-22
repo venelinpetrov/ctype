@@ -21,6 +21,7 @@
                 // TAB
                 case 9: {
                     e.preventDefault();
+                    //fix that later
                     if(e.shiftKey) {
                         i--;
                     } else {
