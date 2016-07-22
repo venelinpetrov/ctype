@@ -2,7 +2,7 @@
     Simple.sounds = [];
     Simple.kit = ['/SimpleKit/', ['000.wav','001.wav','002.wav']];
     Simple.play = function (e) {
-        let bufferSource = CTX.createBufferSource();
+        let bufferSource = new BufferSource();
         switch(e.keyCode) {
             //backspace
             case 8: {
