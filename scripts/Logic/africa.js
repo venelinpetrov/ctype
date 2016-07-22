@@ -6,11 +6,8 @@
     
     Africa.play = function (e) {
         let bufferSource = new BufferSource();
-        let vcf1 = new Filter();
-        //let vcf2 = new Filter();
-
-        vcf1.type = 'lowpass';
-        vcf1.frequency = 400;
+        //let vcf1 = new Filter();
+        let vcf1;
 
         switch(e.keyCode) {
             //backspace, simulates error on typing (dummy)
@@ -49,6 +46,7 @@
 
             default: {
                 if(!e.shiftKey) { //temporary, fix later
+                    vcf1 = new ComplexFilter();
                     bufferSource.gain = .2;
                     bufferSource.buffer = isVowel(e) ? this.sounds[4] : this.sounds[5]; // try also this.sounds[3] : this.sounds[4];
                     bufferSource.connect(vcf1);
