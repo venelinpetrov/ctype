@@ -9,3 +9,22 @@ code {
     border-radius: 2px;
     font-family: monospace;
 }
+
+.option_list {
+    margin: 0;
+    padding: 0;
+}
+.option_list li {
+    display: flex;
+    align-items: center;
+    padding: 4px 0;
+}
+
+.option_list li label {
+    width: 170px;
+}
+
+.option_list,
+.option_fieldset {
+    display: inline-block;
+}
