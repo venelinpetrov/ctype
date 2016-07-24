@@ -1,14 +1,11 @@
 // sounds on: . , ! ? letter capitalLetter
 
-(function (Africa) {
-    Africa.sounds = [];
-    Africa.kit = ['/AfricaKit/', ['001.wav', '002.wav', '003.wav', '004.wav', '005.wav', '006.wav', '007.wav']];
+(function (Caret) {
+    Caret.sounds = [];
+    Caret.kit = ['/CaretKit/', ['001.wav', '002.wav', '003.wav', '004.wav', '005.wav']];
     
-    Africa.play = function (e) {
+    Caret.play = function (e) {
         let bufferSource = new BufferSource();
-        //let vcf1 = new Filter();
-        let vcf1;
-
         switch(e.keyCode) {
             //backspace, simulates error on typing (dummy)
             case 8: {
@@ -39,17 +36,15 @@
             case 49: {
                 if(e.shiftKey) {
                     bufferSource.gain = .2;
-                    bufferSource.buffer = this.sounds[6];
+                    bufferSource.buffer = this.sounds[4];
                     break;
                 }
             }
 
             default: {
                 if(!e.shiftKey) { //temporary, fix later
-                    vcf1 = new ComplexFilter();
                     bufferSource.gain = .2;
-                    bufferSource.buffer = isVowel(e) ? this.sounds[4] : this.sounds[5]; // try also this.sounds[3] : this.sounds[4];
-                    bufferSource.connect(vcf1);
+                    bufferSource.buffer = isVowel(e) ? this.sounds[4] : this.sounds[3]; // try also this.sounds[3] : this.sounds[4];
                     break;
                 }
             }
@@ -67,9 +62,9 @@
             case 69:
             case 73:
             case 89:
-                return true;
+                return true
             default:
-                return false;
+                return false
         }
     }
-})(window.Africa = window.Africa || {});
+})(window.Caret = window.Caret || {});

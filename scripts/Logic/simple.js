@@ -1,8 +1,8 @@
-(function (Logic) {
-    Logic.sounds = [];
-    Logic.kit = ['/SimpleKit/', ['000.wav','001.wav','002.wav']];
-    Logic.play = function (e) {
-        let bufferSource = CTX.createBufferSource();
+(function (Simple) {
+    Simple.sounds = [];
+    Simple.kit = ['/SimpleKit/', ['000.wav','001.wav','002.wav']];
+    Simple.play = function (e) {
+        let bufferSource = new BufferSource();
         switch(e.keyCode) {
             //backspace
             case 8: {
@@ -22,4 +22,4 @@
 
         return bufferSource;
     };
-})(window.Logic = window.Logic || {});
+})(window.Simple = window.Simple || {});

@@ -1,8 +1,8 @@
-(function (Logic) {
-    Logic.sounds = [];
-    Logic.kit = ['/SmoothKit/', ['001.wav','002.wav']];
-    Logic.play = function (e) {
-        let bufferSource = CTX.createBufferSource();
+(function (Smooth) {
+    Smooth.sounds = [];
+    Smooth.kit = ['/SmoothKit/', ['001.wav','002.wav']];
+    Smooth.play = function (e) {
+        let bufferSource = new BufferSource();
         
         if (e.keyCode == 8) {
             bufferSource.buffer = this.sounds[0];
@@ -13,4 +13,4 @@
         
         return bufferSource;
     };
-})(window.Logic = window.Logic || {});
+})(window.Smooth = window.Smooth || {});
