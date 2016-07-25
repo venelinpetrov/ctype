@@ -37,6 +37,8 @@
             case 49: {
                 if(e.shiftKey) {
                     bufferSource.gain = .5;
+                    vcf2 = new ComplexFilter('vcf2');
+                    bufferSource.connect(vcf2);
                     bufferSource.buffer = this.sounds[6];
                     break;
                 }
@@ -44,7 +46,7 @@
 
             default: {
                 if(!e.shiftKey) { //temporary, fix later
-                    vcf1 = new ComplexFilter();
+                    vcf1 = new ComplexFilter('vcf1');
                     bufferSource.buffer = isVowel(e) ? this.sounds[4] : this.sounds[5]; // try also this.sounds[3] : this.sounds[4];
                     bufferSource.connect(vcf1);
                     //vcf1.update();

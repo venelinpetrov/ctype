@@ -82,12 +82,16 @@ class Filter {
         } catch (e) { }
     }
 
+    get type() {
+        return this.vcf.type;
+    }
+
     set type(value) {
         this.vcf.type = value;
     }
 
     get frequency() {
-        return this.vcf.frequency;
+        return this.vcf.frequency.value;
     }
 
     set frequency(value) {
