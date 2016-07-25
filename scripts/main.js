@@ -6,6 +6,7 @@
         let masterGain = CTX.createGain();
         let masterGainElem = document.getElementById('master_gain');
         let editorElem = document.querySelector('.editor');
+        let filterInputsElem = document.querySelectorAll('.option_list input');
         let kitInputs;
         let currentTypeCallback;
 
@@ -15,7 +16,13 @@
             masterGain.gain.value = e.target.value;
             editorElem.focus();
         });
-        
+
+        Array.from(filterInputsElem, input =>
+            input.addEventListener('change', e =>
+                editorElem.focus()
+            )
+        );
+
         Array.from(kitInputs, el => {
             el.addEventListener('change', changeKit);
         });
@@ -37,7 +44,7 @@
                 if (currentTypeCallback) {
                     editorElem.removeEventListener('keydown', currentTypeCallback);
                 }
-                
+
                 currentTypeCallback = type.bind(null, kitName);
                 editorElem.addEventListener('keydown', currentTypeCallback);
             }).catch(err => console.warn(err));

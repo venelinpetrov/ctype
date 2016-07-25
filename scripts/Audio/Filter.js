@@ -55,7 +55,7 @@ class Filter {
         //input --> dry --> output-(free out)
         this.inputNode.connect(this.dryGain);
         this.dryGain.connect(this.outputNode);
-        this.dryGain.gain.value = 0;
+        //this.dryGain.gain.value = 0;
     }
 
     get input() {
@@ -82,7 +82,7 @@ class Filter {
         } catch (e) { }
     }
 
-    setType(value) {
+    set type(value) {
         this.vcf.type = value;
     }
 
