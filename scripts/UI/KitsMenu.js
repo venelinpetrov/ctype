@@ -1,9 +1,11 @@
 (function(KitsMenu){
-    let ul = document.querySelector('.kit-select');
     let kitInputs;
     let i = 0;
 
     KitsMenu.init = function(kits) {
+        let ul = document.querySelector('.kit-select');
+        let masterGainElem = document.getElementById('master_gain');
+
         kits.forEach(kitName => {
             let li =
             `<li>
@@ -15,7 +17,7 @@
         });
 
         kitInputs = ul.getElementsByTagName('input');
-        
+
         document.body.addEventListener('keydown', e => {
             switch(e.keyCode) {
                 // TAB
@@ -52,7 +54,7 @@
 
         return kitInputs;
     };
-    
+
     KitsMenu.checkRadio = function (radio) {
         radio.checked = true;
         radio.dispatchEvent(new Event('change'));
