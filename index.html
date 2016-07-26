@@ -24,11 +24,11 @@
         <ul class="option_list">
             <li>
                 <label for="vcf1_bypass">Bypass</label>
-                <input id="vcf1_bypass" type="checkbox">
+                <input id="vcf1_bypass" type="checkbox" data-type="boolean">
             </li>
             <li>
                 <label for="vcf1_type">Type</label>
-                <select id="vcf1_type">
+                <select id="vcf1_type" data-type="string">
                     <option value="lowpass">Lowpass</option>
                     <option value="highpass">Highpass</option>
                     <option value="bandpass">Bandpass</option>
@@ -40,19 +40,19 @@
             <li>
                 <!--TODO: Make this in log scale-->
                 <label for="vcf1_freq">Frequency</label>
-                <input id="vcf1_freq" type="range" min="20" max="20000" value="440" step="10">
+                <input id="vcf1_freq" type="range" min="20" max="20000" value="440" step="10" data-type="number">
             </li>
             <li>
                 <label for="vcf1_Q">Q</label>
-                <input id="vcf1_Q" type="range" min="0" max="12" step=".1" value="0">
+                <input id="vcf1_Q" type="range" min="0" max="12" step=".1" value="0" data-type="number">
             </li>
             <li>
                 <label for="vcf1_gain">Gain</label>
-                <input id="vcf1_gain" type="range" min="-40" max="40" step="1" value="0">
+                <input id="vcf1_gain" type="range" min="-40" max="40" step="1" value="0" data-type="number">
             </li>
             <li>
                 <label for="vcf1_dw">Dry/Wet</label>
-                <input id="vcf1_dw" type="range" min="0" max="1" step=".1" value="1">
+                <input id="vcf1_dw" type="range" min="0" max="1" step=".1" value="1" data-type="number">
             </li>
         </ul>
     </fieldset>

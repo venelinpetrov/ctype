@@ -6,45 +6,52 @@ function ComplexFilter(filterName) {
 
     State[filterName] = State[filterName] || {};
 
-    setParameter('frequency', 'vcf1_freq');
+    setParameter('bypass', 'vcf1_bypass');
     setParameter('type', 'vcf1_type');
-    State.soundPointer = filterName;
+    setParameter('frequency', 'vcf1_freq');
+    setParameter('Q', 'vcf1_Q');
+    setParameter('gain', 'vcf1_gain');
+    //setParameter('dryWet', 'vcf1_dw');
 
+    State.soundPointer = filterName;
 
     function setParameter(param, inputElemName) {
         let inputElem = document.getElementById(inputElemName);
+        let inputType = inputElem.getAttribute('data-type');
+        let inputElemValue;
+
+        switch(inputType) {
+            case 'number': {
+                inputElemValue = +inputElem.value;
+                break;
+            }
+            case 'boolean': {
+                inputElemValue = inputElem.checked;
+                break;
+            }
+            case 'string':
+            default: {
+                inputElemValue = inputElem.value;
+            }
+        }
+
         if(State.soundPointer == filterName || State.soundPointer == null) {
-            State[filterName][param] = parse(inputElem.value);
+            State[filterName][param] = inputElemValue;
             vcf[param] = State[filterName][param];
-            inputElem.value = vcf[param];
+            if(inputType == 'boolean') {
+                inputElem.checked = vcf[param];
+            } else {
+                inputElem.value = vcf[param];
+            }
         } else {
-            vcf[param] = State[filterName][param] || inputElem.value;
-            inputElem.value = vcf[param];
+            vcf[param] = State[filterName][param] || inputElemValue;
+            if(inputType == 'boolean') {
+                inputElem.checked = vcf[param];
+            } else {
+                inputElem.value = vcf[param];
+            }
         }
     }
-
-    function parse(str) {
-        var value = Number(str);
-
-        if(!isNaN(Number(str))) {
-            return Number(str);
-        }
-        if(str == 'true') {
-            return true;
-        }
-        if(str == 'false') {
-            return false;
-        }
-        return str;
-    }
-
-    vcf.bypass(document.getElementById('vcf1_bypass').checked);
-    vcf.type = document.getElementById('vcf1_type').value;
-    //vcf[param] = +document.getElementById('vcf1_freq').value;
-    vcf.Q = +document.getElementById('vcf1_Q').value;
-    vcf.gain = +document.getElementById('vcf1_gain').value;
-
-    vcf.setDryWet(+document.getElementById('vcf1_dw').value);
 
     return vcf;
 }
