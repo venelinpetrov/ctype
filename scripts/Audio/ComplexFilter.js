@@ -11,7 +11,7 @@ function ComplexFilter(filterName) {
     setParameter('frequency', 'vcf1_freq');
     setParameter('Q', 'vcf1_Q');
     setParameter('gain', 'vcf1_gain');
-    //setParameter('dryWet', 'vcf1_dw');
+    setParameter('dryWet', 'vcf1_dw');
 
     State.soundPointer = filterName;
 
@@ -35,16 +35,14 @@ function ComplexFilter(filterName) {
             }
         }
 
-        if(State.soundPointer == filterName || State.soundPointer == null) {
+        //case: same sound as before
+        if(State.soundPointer == filterName) {
             State[filterName][param] = inputElemValue;
             vcf[param] = State[filterName][param];
-            if(inputType == 'boolean') {
-                inputElem.checked = vcf[param];
-            } else {
-                inputElem.value = vcf[param];
-            }
+
+        //case: different sound
         } else {
-            vcf[param] = State[filterName][param] || inputElemValue;
+            vcf[param] = State[filterName][param] != undefined ? State[filterName][param] : inputElemValue;
             if(inputType == 'boolean') {
                 inputElem.checked = vcf[param];
             } else {

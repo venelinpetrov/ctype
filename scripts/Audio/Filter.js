@@ -36,7 +36,7 @@
 class Filter {
     constructor() {
         this.bypassed = false;
-
+        this._dryWet= 1;
         //create filter node
         this.vcf = CTX.createBiquadFilter();
 
@@ -122,8 +122,13 @@ class Filter {
         this.vcf.Q.value = value;
     }
 
+    get dryWet() {
+        return this._dryWet;
+    }
+
     //set dry/wet, value=1 means 100% wet signal
-    setDryWet(value) {
+    set dryWet(value) {
+        this._dryWet = value;
         this.wetGain.gain.value = value;
         this.dryGain.gain.value = 1 - value;
     }
