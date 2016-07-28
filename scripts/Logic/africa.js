@@ -3,7 +3,7 @@
 (function (Africa) {
     Africa.sounds = [];
     Africa.kit = ['/AfricaKit/', ['001.wav', '002.wav', '003.wav', '004.wav', '005.wav', '006.wav', '007.wav']];
-    
+
     Africa.play = function (e) {
         let bufferSource = new BufferSource();
         //let vcf1 = new Filter();
@@ -17,12 +17,10 @@
 
             //'.' and ','
             case 190: {
-                bufferSource.gain = .5;
                 bufferSource.buffer = this.sounds[0];
                 break;
             }
             case 188: {
-                bufferSource.gain = .4;
                 bufferSource.buffer = this.sounds[2];
                 break;
             }
@@ -38,7 +36,9 @@
             // '!'
             case 49: {
                 if(e.shiftKey) {
-                    bufferSource.gain = .2;
+                    bufferSource.gain = .5;
+                    vcf2 = new ComplexFilter('vcf2');
+                    bufferSource.connect(vcf2);
                     bufferSource.buffer = this.sounds[6];
                     break;
                 }
@@ -46,10 +46,10 @@
 
             default: {
                 if(!e.shiftKey) { //temporary, fix later
-                    vcf1 = new ComplexFilter();
-                    bufferSource.gain = .2;
+                    vcf1 = new ComplexFilter('vcf1');
                     bufferSource.buffer = isVowel(e) ? this.sounds[4] : this.sounds[5]; // try also this.sounds[3] : this.sounds[4];
                     bufferSource.connect(vcf1);
+                    //vcf1.update();
                     break;
                 }
             }

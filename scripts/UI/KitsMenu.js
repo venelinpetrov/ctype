@@ -58,7 +58,7 @@
     KitsMenu.checkRadio = function (radio) {
         radio.checked = true;
         radio.dispatchEvent(new Event('change'));
-    }
+    };
 
     function capitalize() {
         return this.charAt(0).toUpperCase() + this.slice(1);
