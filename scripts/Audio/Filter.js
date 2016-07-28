@@ -35,6 +35,8 @@
 */
 class Filter {
     constructor() {
+        this.bypassed = false;
+        this._dryWet= 1;
         //create filter node
         this.vcf = CTX.createBiquadFilter();
 
@@ -55,7 +57,6 @@ class Filter {
         //input --> dry --> output-(free out)
         this.inputNode.connect(this.dryGain);
         this.dryGain.connect(this.outputNode);
-        //this.dryGain.gain.value = 0;
     }
 
     get input() {
@@ -70,7 +71,11 @@ class Filter {
         this.output.connect(node);
     }
 
-    bypass(bypassed) {
+    get bypass() {
+        return this.bypassed;
+    }
+
+    set bypass(bypassed) {
         try {
             if(bypassed) {
                 this.inputNode.disconnect(this.vcf);
@@ -79,7 +84,10 @@ class Filter {
                 this.inputNode.disconnect(this.outputNode);
                 this.inputNode.connect(this.vcf);
             }
-        } catch (e) { }
+        } catch (e) {
+        } finally {
+            this.bypassed = bypassed;
+        }
     }
 
     get type() {
@@ -99,7 +107,7 @@ class Filter {
     }
 
     get gain() {
-        return this.vcf.gain;
+        return this.vcf.gain.value;
     }
 
     set gain(value) {
@@ -107,15 +115,20 @@ class Filter {
     }
 
     get Q() {
-        return this.vcf.Q;
+        return this.vcf.Q.value;
     }
 
     set Q(value) {
         this.vcf.Q.value = value;
     }
 
+    get dryWet() {
+        return this._dryWet;
+    }
+
     //set dry/wet, value=1 means 100% wet signal
-    setDryWet(value) {
+    set dryWet(value) {
+        this._dryWet = value;
         this.wetGain.gain.value = value;
         this.dryGain.gain.value = 1 - value;
     }
