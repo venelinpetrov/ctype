@@ -126,6 +126,14 @@ class Filter {
         return this._dryWet;
     }
 
+    get outputLevel() {
+        return this._output.gain.value;
+    }
+
+    set outputLevel(value) {
+        this._output.gain.value = value;
+    }
+
     //set dry/wet, value=1 means 100% wet signal
     set dryWet(value) {
         this._dryWet = value;
