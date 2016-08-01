@@ -3,6 +3,7 @@ class BufferSource {
         this._gainNode = CTX.createGain();
         this._bufferSourceNode = CTX.createBufferSource();
         this._bufferSourceNode.connect(this._gainNode);
+        this._soundName = '';
         this._outputNode = null;
     }
 
@@ -22,7 +23,7 @@ class BufferSource {
     set gain(value) {
         this._gainNode.gain.value = value;
     }
-    
+
     get buffer() {
         return this._bufferSourceNode.buffer;
     }
@@ -33,5 +34,13 @@ class BufferSource {
 
     get output() {
         return this._outputNode || this._gainNode;
+    }
+
+    get soundName() {
+        return this._soundName;
+    }
+
+    set soundName(value) {
+        this._soundName = value;
     }
 }
