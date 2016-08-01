@@ -35,7 +35,7 @@
 */
 class Filter {
     constructor() {
-        this.bypassed = false;
+        this.bypassed = true;
         this._dryWet= 1;
         //create filter node
         this.vcf = CTX.createBiquadFilter();
