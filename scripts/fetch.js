@@ -33,5 +33,5 @@
         })
 
         return Promise.all(resources);
-    }
+    };
 })(window.Resource = window.Resource || {});

@@ -36,7 +36,6 @@
             // '!'
             case 49: {
                 if(e.shiftKey) {
-                    bufferSource.gain = .5;
                     bufferSource.buffer = this.sounds[6];
                     bufferSource.soundName = '007';
                     break;
