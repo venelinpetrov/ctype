@@ -12,6 +12,7 @@ function ComplexFilter(filterName) {
     setParameter('Q', 'vcf1_Q');
     setParameter('gain', 'vcf1_gain');
     setParameter('dryWet', 'vcf1_dw');
+    setParameter('outputLevel', 'vcf1_outputLevel');
 
     State.soundPointer = filterName;
 

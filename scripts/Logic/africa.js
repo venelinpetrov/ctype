@@ -1,16 +1,13 @@
 // sounds on: . , ! ? letter capitalLetter
 
 (function (Africa) {
-    Africa.sounds = [];
+    Africa.sounds = []; // this array will be filled when all sounds are fetched
     Africa.kit = ['/AfricaKit/', ['001.wav', '002.wav', '003.wav', '004.wav', '005.wav', '006.wav', '007.wav']];
 
     Africa.play = function (e) {
         let bufferSource = new BufferSource();
-        //let vcf1 = new Filter();
-        let vcf1;
 
         switch(e.keyCode) {
-            //backspace, simulates error on typing (dummy)
             case 8: {
                 break;
             }
@@ -18,10 +15,12 @@
             //'.' and ','
             case 190: {
                 bufferSource.buffer = this.sounds[0];
+                bufferSource.soundName = '001';
                 break;
             }
             case 188: {
                 bufferSource.buffer = this.sounds[2];
+                bufferSource.soundName = '003';
                 break;
             }
 
@@ -29,6 +28,7 @@
             case 191: {
                 if(e.shiftKey) {
                     bufferSource.buffer = this.sounds[1];
+                    bufferSource.soundName = '002';
                     break;
                 }
             }
@@ -36,20 +36,16 @@
             // '!'
             case 49: {
                 if(e.shiftKey) {
-                    bufferSource.gain = .5;
-                    vcf2 = new ComplexFilter('vcf2');
-                    bufferSource.connect(vcf2);
                     bufferSource.buffer = this.sounds[6];
+                    bufferSource.soundName = '007';
                     break;
                 }
             }
 
             default: {
                 if(!e.shiftKey) { //temporary, fix later
-                    vcf1 = new ComplexFilter('vcf1');
-                    bufferSource.buffer = isVowel(e) ? this.sounds[4] : this.sounds[5]; // try also this.sounds[3] : this.sounds[4];
-                    bufferSource.connect(vcf1);
-                    //vcf1.update();
+                    bufferSource.buffer = isVowel(e) ? this.sounds[4] : this.sounds[5];
+                    bufferSource.soundName = isVowel(e) ? '005' : '006';
                     break;
                 }
             }

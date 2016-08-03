@@ -35,36 +35,36 @@
 */
 class Filter {
     constructor() {
-        this.bypassed = false;
+        this._bypassed = true;
         this._dryWet= 1;
         //create filter node
-        this.vcf = CTX.createBiquadFilter();
+        this._vcf = CTX.createBiquadFilter();
 
         //dry/wet gains
-        this.dryGain = CTX.createGain();
-        this.wetGain = CTX.createGain();
+        this._dryGain = CTX.createGain();
+        this._wetGain = CTX.createGain();
 
         //input and output
-        this.inputNode = CTX.createGain();
-        this.outputNode = CTX.createGain();
+        this._input = CTX.createGain();
+        this._output = CTX.createGain();
 
         //connections
         //input --> vcf --> wet --> output-(free out)
-        this.inputNode.connect(this.vcf);
-        this.vcf.connect(this.wetGain);
-        this.wetGain.connect(this.outputNode);
+        this._input.connect(this._vcf);
+        this._vcf.connect(this._wetGain);
+        this._wetGain.connect(this._output);
 
         //input --> dry --> output-(free out)
-        this.inputNode.connect(this.dryGain);
-        this.dryGain.connect(this.outputNode);
+        this._input.connect(this._dryGain);
+        this._dryGain.connect(this._output);
     }
 
     get input() {
-        return this.inputNode;
+        return this._input;
     }
 
     get output() {
-        return this.outputNode;
+        return this._output;
     }
 
     connect(node) {
@@ -72,64 +72,72 @@ class Filter {
     }
 
     get bypass() {
-        return this.bypassed;
+        return this._bypassed;
     }
 
     set bypass(bypassed) {
         try {
             if(bypassed) {
-                this.inputNode.disconnect(this.vcf);
-                this.inputNode.connect(this.outputNode);
+                this._input.disconnect(this._vcf);
+                this._input.connect(this._output);
             } else {
-                this.inputNode.disconnect(this.outputNode);
-                this.inputNode.connect(this.vcf);
+                this._input.disconnect(this._output);
+                this._input.connect(this._vcf);
             }
         } catch (e) {
         } finally {
-            this.bypassed = bypassed;
+            this._bypassed = bypassed;
         }
     }
 
     get type() {
-        return this.vcf.type;
+        return this._vcf.type;
     }
 
     set type(value) {
-        this.vcf.type = value;
+        this._vcf.type = value;
     }
 
     get frequency() {
-        return this.vcf.frequency.value;
+        return this._vcf.frequency.value;
     }
 
     set frequency(value) {
-        this.vcf.frequency.value = value;
+        this._vcf.frequency.value = value;
     }
 
     get gain() {
-        return this.vcf.gain.value;
+        return this._vcf.gain.value;
     }
 
     set gain(value) {
-        this.vcf.gain.value = value;
+        this._vcf.gain.value = value;
     }
 
     get Q() {
-        return this.vcf.Q.value;
+        return this._vcf.Q.value;
     }
 
     set Q(value) {
-        this.vcf.Q.value = value;
+        this._vcf.Q.value = value;
     }
 
     get dryWet() {
         return this._dryWet;
     }
 
+    get outputLevel() {
+        return this._output.gain.value;
+    }
+
+    set outputLevel(value) {
+        this._output.gain.value = value;
+    }
+
     //set dry/wet, value=1 means 100% wet signal
     set dryWet(value) {
         this._dryWet = value;
-        this.wetGain.gain.value = value;
-        this.dryGain.gain.value = 1 - value;
+        this._wetGain.gain.value = value;
+        this._dryGain.gain.value = 1 - value;
     }
 }
