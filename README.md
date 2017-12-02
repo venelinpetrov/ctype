@@ -56,8 +56,6 @@ You add logic under the `/Logic` folder under the form of js file, which has som
 
 })(window.Africa = window.Africa || {}); // (mandatory)
 ```
-Note: I see some "weak" spots right now, like why the kit should be provided as ` '/AfricaKit/' ` and not simply ` 'AfricaKit' `
-and the strange looking empty array on the first line. Just close your eyes and meditate. If your day is sunny make PR! 
 
 ### Connections
 Firstly it's important to know how the things are connected. It's pretty simple in this case
@@ -73,7 +71,7 @@ This program provides several different filter: Lowpass, Highpass, Bandpass, Low
 For instance, Lowpass and Bandpass are pretty "agressive" in frequency cutting and are commonly used in sound synthesis, whereas Lowshelf and Highshelf
 are more "smooth" and are common in mixing applications. More on filters below:
 
-####All filters
+#### All filters
 All filters in this program has the following common options (although all options are visible (but not functional) in the UI )
 
 1. **Bypass** (default: true) - sound passes freely without being modified at all
@@ -82,42 +80,42 @@ All filters in this program has the following common options (although all optio
 4. **Dry/Wet** (default: 1) - this parameter determines how much of the original sound is passed freely and how much is filtered. 1 means 100% filtered. Range [0-1]
 5. **Output Level** (default: 1) - this is not a real filter parameter, it's convenience that allows you to "mix" the sounds, i.e. adjust their relative leveles. You can use this to make some sounds more obvious or less obvious. Range [0-1]
 
-####Lowpass filter
+#### Lowpass filter
 ![lp](https://cloud.githubusercontent.com/assets/3126733/17375317/1584a340-59b9-11e6-801c-75d99baee795.png)
 
 Additional parameter:
 
 **Q** - quality factor, or resonance, meaning how resonant is the filter around the cutoff frequency. Unitless, range [0-12]
 
-####Highpass filter
+#### Highpass filter
 ![hp](https://cloud.githubusercontent.com/assets/3126733/17375420/90b212be-59b9-11e6-8080-5ca71cdeb059.png)
 
 Additional parameter:
 
 **Q** - quality factor, or resonance, meaning how resonant is the filter around the cutoff frequency. Unitless, range [0-12]
 
-###Bandpass filter
+#### Bandpass filter
 ![bp](https://cloud.githubusercontent.com/assets/3126733/17375432/9a7205f2-59b9-11e6-8373-c941eb8c4ac1.png)
 
 Additional parameter:
 
 **Q** - quality factor, or resonance, meaning how resonant is the filter around the cutoff frequency. Unitless, range [0-12]
 
-###Lowshelf filter
+#### Lowshelf filter
 ![ls](https://cloud.githubusercontent.com/assets/3126733/17375433/9de3f916-59b9-11e6-8175-70f79ccd3e4f.png)
 
 Additional parameter:
 
 **Gain** - how much the frequencies are attenuated (if negative) or how much the frequencies are boosted (if positive). Unitless, range [-40-+40]
 
-###Highshelf filter
+#### Highshelf filter
 ![hs](https://cloud.githubusercontent.com/assets/3126733/17375437/a17fb59c-59b9-11e6-9cca-2d527abbe52a.png)
 
 Additional parameter:
 
 **Gain** - how much the frequencies are attenuated (if negative) or how much the frequencies are boosted (if positive). Unitless, range [-40-+40]
 
-###Notch filter
+#### Notch filter
 ![nc](https://cloud.githubusercontent.com/assets/3126733/17375443/a4ee0aa8-59b9-11e6-886e-2bc503b36846.png)
 
 Additional parameter:
@@ -126,7 +124,7 @@ Additional parameter:
 
 It should be clear that Q change doesn't make any difference to Lowshelf or Highshelf filters or Gain to Lowpass and Highpass and so on.
 
-##Known issues
+## Known issues
 
 1. If you need to change sound parameter you should click the same key again so the setting to be saved. This shouldn't be so scarry, given that you probably want to actually hear the change after it has been made
 2. If you want to change parameters for sound that is bound to Shift+something key you need to keep holding the shift while making the change
